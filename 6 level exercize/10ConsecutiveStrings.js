@@ -27,8 +27,10 @@ const longestConsec = (strarr, k) => {
  * @returns 
  */
 const longestConsec2 = (strarr, k) =>
-  strarr
-    .map((str, i, arr) => arr.slice(i, i+k).join(""))
-    .reduce((res, str) => res.length < str.length ? str : res, "");
+  !strarr.length || k > strarr.length || k <= 0
+    ? ""
+    : strarr
+      .map((str, i, arr) => arr.slice(i, i+k).join(""))
+      .reduce((res, str) => res.length < str.length ? str : res, "");
 
 console.log(longestConsec2(["it","wkppv","ixoyx", "3452", "zzzzzzzzzzzz"], 3));
