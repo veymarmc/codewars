@@ -20,7 +20,7 @@ const friends = n => {
 }
 
 // Recursive solution
-const friends = (n, e = 2) => {
+const friends2 = (n, e = 2) => {
   return n <= 2
     ? 0 
     : Math.pow(2, e) < n
