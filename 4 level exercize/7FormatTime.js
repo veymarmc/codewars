@@ -17,18 +17,22 @@ const timeDuration = [
  * @returns formated time in human friendly written way.
  */
 function formatDuration (seconds) {
-  if (seconds === 0) {
+  if (seconds === 0)
     return 'now'
-  }
 
-  const timeComponents = timeDuration.reduce((arrayComponents, timeDur) => {
-    if (seconds >= timeDur[1]) {
-      // make calculations and return the corrent format for this specifica time-duration.
-      // also update seconds accordingly.
-      return [];
-    }
-    return arrayComponents;
-  }, []);
-
-  // next step: format the array to string with the final "and" to the last time-component.
+  return timeDuration
+    .reduce((arrayComponents, timeDur) => {
+      if (seconds >= timeDur[1]) {
+        const amount = Math.floor(seconds / timeDur[1]);
+        seconds = seconds % timeDur[1];
+        return [...arrayComponents, `${amount} ${timeDur[0]}${amount > 1 ? 's' : ''}`];
+      }
+      return arrayComponents;
+    }, [])
+    .join(', ').replace(/,\s([^,]+)$/, ' and $1'); // shorter solution, but maybe more heavy about calculation
+    // .reduce((r, comp, i) => { // maybe the best performant solution, but larger one.
+    //   return r + `${comp}${i < timeComponents.length-1 ? (i === timeComponents.length-2 ? ' and ' : ', '): ''}`;
+    // }, "");
 }
+
+console.log(formatDuration(3662));
