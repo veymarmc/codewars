@@ -5,8 +5,18 @@
  */
 // takes: String; returns: [ [String,Int] ] (Strings in return value are single characters)
 function frequencies(s) {
-  
+  return s.split('').reduce((freqs, char) => {
+    const found = freqs.some((fr) => fr[0] === char);
+    if(!found) {
+      const regexChar = new RegExp(char, 'g');
+      freqs.push([char, s.match(regexChar).length])
+    }
+    return freqs;
+  }, []);
 }
+
+const s = "A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED";
+console.log(frequencies(s));
 
 // takes: [ [String,Int] ], String; returns: String (with "0" and "1")
 function encode(freqs,s) {
