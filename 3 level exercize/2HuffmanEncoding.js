@@ -5,32 +5,54 @@
  */
 // takes: String; returns: [ [String,Int] ] (Strings in return value are single characters)
 function frequencies(s) {
-  return s.split('').reduce((freqs, char) => {
-    const found = freqs.some((fr) => fr[0] === char);
-    if(!found) {
-      const regexChar = new RegExp(char, 'g');
-      freqs.push([char, s.match(regexChar).length])
-    }
-    return freqs;
-  }, []);
+	return s.split("").reduce((freqs, char) => {
+		const found = freqs.some(fr => fr[0] === char);
+		if (!found) {
+			const regexChar = new RegExp(char, "g");
+			freqs.push([char, s.match(regexChar).length]);
+		}
+		return freqs;
+	}, []);
+}
+
+function mixTree(treeArray) {
+	const node = {
+		weight: treeArray[0].weight + treeArray[1].weight,
+		children: treeArray
+	};
+	treeArray[0].code = 0;
+	treeArray[1].code = 1;
+	return node;
+}
+
+function buildHuffmanTree(freqs) {
+	// get the array of trees from the freqs.
+	const treeArray = freqs.map(freq => ({ letter: freq[0], weight: freq[1] }));
+
+	while (treeArray.length > 1) {
+		treeArray.sort((a, b) => a.weight - b.weight);
+		const treesToCompare = treeArray.splice(0, 2);
+		const newMixedTree = mixTree(treesToCompare);
+		treeArray.push(newMixedTree);
+	}
+
+	return treeArray[0];
 }
 
 const s = "A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED";
-console.log(frequencies(s));
+const freqs = frequencies(s);
+console.log(freqs);
+console.log(JSON.stringify(buildHuffmanTree(freqs), null, " "));
 
 // takes: [ [String,Int] ], String; returns: String (with "0" and "1")
-function encode(freqs,s) {
-  
-}
+function encode(freqs, s) {}
 
 // takes [ [String, Int] ], String (with "0" and "1"); returns: String
-function decode(freqs,bits) {
-  
-}
+function decode(freqs, bits) {}
 
 /*
 Tasks to do:
-  - [o] make the frequencies algorithm given any text.
+  - [x] make the frequencies algorithm given any text.
   - [x] study the examples of the tests to know exactly how to encode and decode.
   - [x] if the previous information is not enough, study the Huffman Encodding in order to check more examples.
     - Data: the given string
@@ -75,8 +97,10 @@ Tasks to do:
     - the algorithm to decode:
       - have the hauffman tree
       - traverse each bit to the hauffman tree and find the respective letter.
-  - [o] with the result of the previous information recheck and study binary tree data structure to solve the problem.
+  - [x] with the result of the previous information recheck and study binary tree data structure to solve the problem.
+  - [0] make the huffman tree construction algorithm.
   - [o] make the encode algorithm
   - [o] make the decode algorithm
   - [o] study a little bit the tests in order to begin with unit tests.
 */
+
