@@ -34,6 +34,8 @@ function buildHuffmanTree(freqs) {
 
 // takes: [ [String,Int] ], String; returns: String (with "0" and "1")
 function encode(freqs, s) {
+  if (freqs.length < 2) return null;
+
   function getHuffmanCode(letter, huffmanTree, code = "") {
     if (letter === huffmanTree.letter) return code;
   
@@ -51,6 +53,8 @@ function encode(freqs, s) {
 
 // takes [ [String, Int] ], String (with "0" and "1"); returns: String
 function decode(freqs, bits) {
+  if (freqs.length < 2) return null;
+
   function getHuffmanLetter(huffmanTree, bits) {
     if (huffmanTree.letter.length === 1) return huffmanTree.letter;
   
