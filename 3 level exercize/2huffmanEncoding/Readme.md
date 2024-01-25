@@ -49,3 +49,4 @@
   - [x] make the encode algorithm
   - [x] make the decode algorithm
   - [x] study a little bit the tests in order to begin with unit tests.
+  - [ ] improve the perfomance of the algorithm to pass codewars js execution engine
