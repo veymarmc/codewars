@@ -17,11 +17,13 @@ function frequencies(s) {
 
 function mixTree(treeArray) {
 	const node = {
+    letter: treeArray[0].letter + treeArray[1].letter,
 		weight: treeArray[0].weight + treeArray[1].weight,
-		children: treeArray
+		children: treeArray,
+    code: ""
 	};
-	treeArray[0].code = 0;
-	treeArray[1].code = 1;
+	treeArray[0].code = "0";
+	treeArray[1].code = "1";
 	return node;
 }
 
@@ -38,14 +40,31 @@ function buildHuffmanTree(freqs) {
 
 	return treeArray[0];
 }
-
+// ################ TEST PART ##################
 const s = "A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED";
 const freqs = frequencies(s);
 console.log(freqs);
-console.log(JSON.stringify(buildHuffmanTree(freqs), null, " "));
+const huffmanTree = buildHuffmanTree(freqs);
+// console.log(JSON.stringify(huffmanTree, null, " "));
+// const huffmanCodeForA = getHuffmanCode('A', huffmanTree);
+// console.log('huffman code for A: ', huffmanCodeForA);
+console.log(encode(freqs, s) === "1000011101001000110010011101100111001001000111110010011111011111100010001111110100111001001011111011101000111111001");
+
+function getHuffmanCode(letter, huffmanTree, code = "") {
+  if (letter === huffmanTree.letter)
+    return code + huffmanTree.code;
+
+  return huffmanTree.children[0].letter.includes(letter)
+    ? getHuffmanCode(letter, huffmanTree.children[0], code + huffmanTree.code)
+    : getHuffmanCode(letter, huffmanTree.children[1], code + huffmanTree.code);
+}
 
 // takes: [ [String,Int] ], String; returns: String (with "0" and "1")
-function encode(freqs, s) {}
+function encode(freqs, s) {
+  const huffmanTree = buildHuffmanTree(freqs);
+  const letterCodesArray = freqs.map(([letter]) => [letter, getHuffmanCode(letter, huffmanTree)]);
+  return letterCodesArray.reduce((code, letterCode) => code.replaceAll(letterCode[0], letterCode[1]), s);
+}
 
 // takes [ [String, Int] ], String (with "0" and "1"); returns: String
 function decode(freqs, bits) {}
