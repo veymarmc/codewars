@@ -15,18 +15,6 @@ function frequencies(s) {
 	}, []);
 }
 
-function mixTree(treeArray) {
-	const node = {
-    letter: treeArray[0].letter + treeArray[1].letter,
-		weight: treeArray[0].weight + treeArray[1].weight,
-		children: treeArray,
-    code: ""
-	};
-	treeArray[0].code = "0";
-	treeArray[1].code = "1";
-	return node;
-}
-
 function buildHuffmanTree(freqs) {
 	// get the array of trees from the freqs.
 	const treeArray = freqs.map(freq => ({ letter: freq[0], weight: freq[1] }));
@@ -34,8 +22,11 @@ function buildHuffmanTree(freqs) {
 	while (treeArray.length > 1) {
 		treeArray.sort((a, b) => a.weight - b.weight);
 		const treesToCompare = treeArray.splice(0, 2);
-		const newMixedTree = mixTree(treesToCompare);
-		treeArray.push(newMixedTree);
+		treeArray.push({
+      letter: treesToCompare[0].letter + treesToCompare[1].letter,
+      weight: treesToCompare[0].weight + treesToCompare[1].weight,
+      children: treesToCompare,
+    });
 	}
 
 	return treeArray[0];
@@ -52,11 +43,11 @@ console.log(encode(freqs, s) === "1000011101001000110010011101100111001001000111
 
 function getHuffmanCode(letter, huffmanTree, code = "") {
   if (letter === huffmanTree.letter)
-    return code + huffmanTree.code;
+    return code;
 
   return huffmanTree.children[0].letter.includes(letter)
-    ? getHuffmanCode(letter, huffmanTree.children[0], code + huffmanTree.code)
-    : getHuffmanCode(letter, huffmanTree.children[1], code + huffmanTree.code);
+    ? getHuffmanCode(letter, huffmanTree.children[0], code + '0')
+    : getHuffmanCode(letter, huffmanTree.children[1], code + '1');
 }
 
 // takes: [ [String,Int] ], String; returns: String (with "0" and "1")
