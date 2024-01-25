@@ -40,15 +40,16 @@ function encode(freqs, s) {
     if (letter === huffmanTree.letter) return code;
   
     return huffmanTree.children[0].letter.includes(letter)
-      ? getHuffmanCode(letter, huffmanTree.children[0], code + "0")
-      : getHuffmanCode(letter, huffmanTree.children[1], code + "1");
+      ? getHuffmanCode(letter, huffmanTree.children[0], code + "~")
+      : getHuffmanCode(letter, huffmanTree.children[1], code + "^");
   }
 
 	const huffmanTree = buildHuffmanTree(freqs);
-	return freqs.reduce(
+	const huffmanCheatyCode = freqs.reduce(
 		(code, [letter]) => code.replaceAll(letter, getHuffmanCode(letter, huffmanTree)),
 		s
 	);
+  return huffmanCheatyCode.replaceAll('~', 0).replaceAll('^', 1);
 }
 
 // takes [ [String, Int] ], String (with "0" and "1"); returns: String
@@ -74,14 +75,14 @@ function decode(freqs, bits) {
 
 // ################ TEST PART ##################
 // ### SHOULD BE IMPLEMENTED WITH UNITESTS INTO A UNITEST FRAMEWORK
-const s = "A_DEAD_DAD_CEDED_A_BAD_BABE_A_BEADED_ABACA_BED";
+const s = "B2C012PCf";
+console.log(s)
 const freqs = frequencies(s);
 console.log(freqs);
 const huffmanTree = buildHuffmanTree(freqs);
 console.log(JSON.stringify(huffmanTree, null, " "));
-const huffmanCodeForA = getHuffmanCode('A', huffmanTree);
-console.log('huffman code for A: ', huffmanCodeForA);
-const bits =
-	"1000011101001000110010011101100111001001000111110010011111011111100010001111110100111001001011111011101000111111001";
-console.log(encode(freqs, s) === bits);
-console.log(decode(freqs, bits));
+// const huffmanCodeForA = getHuffmanCode('A', huffmanTree);
+// console.log('huffman code for A: ', huffmanCodeForA);
+const bits = encode(freqs, s);
+console.log(bits);
+console.log(decode(freqs, bits), s);
