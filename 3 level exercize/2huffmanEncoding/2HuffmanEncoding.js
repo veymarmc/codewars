@@ -34,40 +34,69 @@ function buildHuffmanTree(freqs) {
 
 // takes: [ [String,Int] ], String; returns: String (with "0" and "1")
 function encode(freqs, s) {
-  if (freqs.length < 2) return null;
+	if (freqs.length < 2) return null;
 
-  function getHuffmanCode(letter, huffmanTree, code = "") {
-    if (letter === huffmanTree.letter) return code;
-  
-    return huffmanTree.children[0].letter.includes(letter)
-      ? getHuffmanCode(letter, huffmanTree.children[0], code + "~")
-      : getHuffmanCode(letter, huffmanTree.children[1], code + "^");
-  }
+	// This recursive option seems to be no performant for code wars.
+	function getHuffmanCode(letter, huffmanTree, code = "") {
+		if (letter === huffmanTree.letter) return code;
+
+		return huffmanTree.children[0].letter.includes(letter)
+			? getHuffmanCode(letter, huffmanTree.children[0], code + "~")
+			: getHuffmanCode(letter, huffmanTree.children[1], code + "^");
+	}
+
+	function getHuffmanCodeNoRecursion(letter, huffmanTree) {
+		let code = "";
+		let node = huffmanTree;
+
+		while (letter !== node.letter) {
+			if (node.children[0].letter.includes(letter)) {
+				node = node.children[0];
+				code += "~";
+			} else {
+				node = node.children[1];
+				code += "^";
+			}
+		}
+
+		return code;
+	}
 
 	const huffmanTree = buildHuffmanTree(freqs);
 	const huffmanCheatyCode = freqs.reduce(
-		(code, [letter]) => code.replaceAll(letter, getHuffmanCode(letter, huffmanTree)),
+		(code, [letter]) => code.replaceAll(letter, getHuffmanCodeNoRecursion(letter, huffmanTree)),
 		s
 	);
-  return huffmanCheatyCode.replaceAll('~', 0).replaceAll('^', 1);
+	return huffmanCheatyCode.replaceAll("~", 0).replaceAll("^", 1);
 }
 
 // takes [ [String, Int] ], String (with "0" and "1"); returns: String
 function decode(freqs, bits) {
-  if (freqs.length < 2) return null;
+	if (freqs.length < 2) return null;
 
-  function getHuffmanLetter(huffmanTree, bits) {
-    if (huffmanTree.letter.length === 1) return huffmanTree.letter;
-  
-    return getHuffmanLetter(huffmanTree.children[+bits.splice(0, 1)], bits);
-  }
+	function getHuffmanLetter(huffmanTree, bits) {
+		if (huffmanTree.letter.length === 1) return huffmanTree.letter;
+
+		return getHuffmanLetter(huffmanTree.children[+bits.splice(0, 1)], bits);
+	}
+
+	// This recursive option seems to be no performant for code wars.
+	function getHuffmanLetterNoRecursion(huffmanTree, bits) {
+		let node = huffmanTree;
+
+		while (node.letter.length > 1) {
+			node = node.children[+bits.splice(0, 1)];
+		}
+
+		return node.letter;
+	}
 
 	const huffmanTree = buildHuffmanTree(freqs);
 	const bitsArray = bits.split("");
 	let msg = "";
 
 	while (bitsArray.length > 0) {
-		msg += getHuffmanLetter(huffmanTree, bitsArray);
+		msg += getHuffmanLetterNoRecursion(huffmanTree, bitsArray);
 	}
 
 	return msg;
@@ -76,7 +105,7 @@ function decode(freqs, bits) {
 // ################ TEST PART ##################
 // ### SHOULD BE IMPLEMENTED WITH UNITESTS INTO A UNITEST FRAMEWORK
 const s = "B2C012PCf";
-console.log(s)
+console.log(s);
 const freqs = frequencies(s);
 console.log(freqs);
 const huffmanTree = buildHuffmanTree(freqs);
