@@ -7,7 +7,7 @@
 - **return value**: should be an array of arrays.
 - **min size:** 5.
 - **Algorithm:**
-  - [ ] find the pattern
-  - [ ] make the algorithm for implementing the patthern
-  - [ ] implement.
+  - [x] find the pattern
+  - [x] make the algorithm for implementing the patthern
+  - [ ] implement the algorithm.
 
