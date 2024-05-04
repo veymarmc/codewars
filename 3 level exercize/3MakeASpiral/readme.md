@@ -10,4 +10,10 @@
   - [x] find the pattern
   - [x] make the algorithm for implementing the patthern
   - [ ] implement the algorithm.
+    - [x] create the matrix with 0's
+    - [x] see the data structures to work
+    - [x] check when the algorithm will finish
+  - [x] test the algorithm
+    - [x] recheck how to uni-test in jest
+    - [x] have a vs code plugin to work with jest
 
