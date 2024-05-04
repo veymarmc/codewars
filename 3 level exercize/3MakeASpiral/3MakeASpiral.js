@@ -16,13 +16,15 @@ function spiralize(n) {
 	let strikesLimit = 0;
 
 	while (strikesLimit !== 2) {		
-		const isInMatrixLimits = position[orientation] >= 0 && position[orientation] >= (n - 1);
-		const nextPosition = spiral[!orientation ? position[1] : position[1] + direction][!orientation ? position[0] + direction : position[0]];
+		const isInMatrixLimits = position[orientation] >= 0 && position[orientation] < n;
+		const areTheNextPositionsOne = () => {
+			const nextPosition = spiral[!orientation ? position[1] : position[1] + direction]?.[!orientation ? position[0] + direction : position[0]];
+			const newDirection = changeDirectionCounter == 1 ? direction * (-1) : direction;
+			const nextOppositePosition = spiral[orientation ? position[1] : position[1] + newDirection]?.[orientation ? position[0] + newDirection : position[0]];
+			return nextPosition || nextOppositePosition;
+		}
 
-		if (
-			!isInMatrixLimits || 
-			nextPosition === 1
-		) {
+		if (!isInMatrixLimits || areTheNextPositionsOne()) {
 			// giving one step back			
 			position[orientation] = position[orientation] + direction * -1;
 

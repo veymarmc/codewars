@@ -8,7 +8,22 @@ describe('Make a spiral exercise', () => {
     [1,0,0,0,1],
     [1,1,1,1,1]];
 
-  test('first try', () => {
+  const spiral8 = [
+    [1,1,1,1,1,1,1,1],
+    [0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,0,1],
+    [1,0,0,0,0,1,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1]
+  ]
+
+  test('do spiral 5', () => {
     expect(spiralize(5)).toEqual(spiral5);
+  });
+
+  test('do spiral 8', () => {
+    expect(spiralize(8)).toEqual(spiral8);
   });
 });
