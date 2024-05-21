@@ -11,11 +11,11 @@ function findRepeatedSequenceLen(a0) {
   let next = a0;
   let indexSequence = -1;
 
-  do {
+  while (indexSequence < 0) {
     sequence.push(next);
-    next = `${next}`.split('').reduce((sum, el) => Math.pow(+el, 2) + sum, 0);
+    next = [...`${next}`].reduce((sum, dgt) => sum + (+dgt)**2, 0);
     indexSequence = sequence.indexOf(next);
-  } while (indexSequence < 0);
+  }
 
   return sequence.length - indexSequence; // the repeated sequence will be in that range.
 }
