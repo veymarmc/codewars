@@ -4,9 +4,20 @@
  * @returns the size of the final repeated sequence.
  */
 function findRepeatedSequenceLen(a0) {
-  //coding and coding..
+  if (a0 < 0)
+    throw new Error('The parameter should be a positive integer');
   
-  return 0;
+  const sequence = [];
+  let next = a0;
+  let indexSequence = -1;
+
+  do {
+    sequence.push(next);
+    next = `${next}`.split('').reduce((sum, el) => Math.pow(+el, 2) + sum, 0);
+    indexSequence = sequence.indexOf(next);
+  } while (indexSequence < 0);
+
+  return sequence.length - indexSequence; // the repeated sequence will be in that range.
 }
 
 module.exports = findRepeatedSequenceLen;
