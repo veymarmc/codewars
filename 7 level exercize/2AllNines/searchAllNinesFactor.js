@@ -6,10 +6,12 @@
 function searchAllNinesFactor(x) {
   if(x % 2n === 0n || x % 5n === 0n) return -1n;
 
-  let ninesNumber = BigInt([...`${x}`].map(_ => '9').join(''));
+  // let ninesNumber = BigInt([...`${x}`].map(_ => '9').join('')); // not necessary to complex.
+  let ninesNumber = 9n;
 
   while (ninesNumber % x !== 0n) {
-    ninesNumber = ninesNumber * 10n + 9n;
+    ninesNumber = BigInt(ninesNumber + '9');
+    // ninesNumber = ninesNumber * 10n + 9n; // another alternative, in this case we should compare about conversion to string or arithmetic operations effort
   }
 
   return ninesNumber / x;
