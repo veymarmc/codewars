@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "test": "jest -- searchAllNinesFactor.test.js",
-    "t": "jest --watch searchAllNinesFactor.test.js"
+    "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
