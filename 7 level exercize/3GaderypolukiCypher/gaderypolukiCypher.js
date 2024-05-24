@@ -15,6 +15,14 @@ function translateCode(str) {
   }).join('');
 }
 
+function translateCode2(str) {
+  const code = "gaderypolukiGADERYPOLUKI";
+  return str.replace(new RegExp(`[${code}]`, 'g'), c => {
+    const index = code.indexOf(c);   
+    return index % 2 === 0 ? code.charAt(index + 1) : code.charAt(index -1);
+  });
+}
+
 /**
  * https://www.codewars.com/kata/592a6ad46d6c5a62b600003f/train/javascript
  * @param {string} str
@@ -22,7 +30,7 @@ function translateCode(str) {
  */
 function encode(str) 
 {
-    return translateCode(str);   
+    return translateCode2(str);   
 }
 
 /**
@@ -32,7 +40,7 @@ function encode(str)
  */
 function decode(str) 
 {
-    return translateCode(str);   
+    return translateCode2(str);   
 }
 
 module.exports = { encode, decode } ;
