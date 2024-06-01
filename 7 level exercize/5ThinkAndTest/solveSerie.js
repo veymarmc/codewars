@@ -5,7 +5,7 @@
  * @returns the next element of a series
  */
 function testit(a,b){
-  //return a+b ?
-  //return a*b ?
-  return a + b || a * b;
+  return a | b;
 }
+
+module.exports = testit;
