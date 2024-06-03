@@ -16,7 +16,7 @@ function decipherWhichPostcode(postcode){
 }
 
 function isGBPostcode(postcode) {
-  return /^([a-z]|[a-z]{2})(\d|\d{2}) \d\w{2}$/i.test(postcode);
+  return /^[a-z]{1,2}\d{1,2} \d\w{2}$/i.test(postcode);
 }
 
 function isSKPostcode(postcode) {
