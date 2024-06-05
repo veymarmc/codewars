@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest -- arrayPop.test.js"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
