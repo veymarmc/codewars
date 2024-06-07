@@ -5,6 +5,13 @@
  * @returns The merged string which take on account the overlapping section to merge.
  */
 function mergeOverlappingStrings(first, second){
+  for (let i = 0; i < first.length; i++) {
+    const overlap = first.slice(i);
+    
+    if (second.startsWith(overlap))
+      return first.slice(0, i) + overlap + second.slice(overlap.length);
+  }
+
   return first + second;
 }
 
