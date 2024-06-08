@@ -3,7 +3,8 @@
  * @param {n} lockers number of lockers
  * @returns an array of open lockers after slamming.
  */
-function findOpenLockers(lockers) {
+function findOpenLockers1(lockers) {
+	// brute force method
 	const lockersState = Array(lockers + 1).fill(false);
 
 	for (let i = 1; i < lockersState.length; i++) {
@@ -15,4 +16,16 @@ function findOpenLockers(lockers) {
 	return lockersState.reduce((res, locked, i) => (locked ? [...res, i] : res), []);
 }
 
+function findOpenLockers(lockers) {
+	// Searching and analyzing the pattherns.
+	const answer = [];
+
+	for (let i = 1; i ** 2 <= lockers; i++) {
+		answer.push(i ** 2);
+	}
+
+	return answer;
+}
+
 module.exports = findOpenLockers;
+
