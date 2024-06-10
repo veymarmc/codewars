@@ -11,12 +11,12 @@ function getNumberOfPathsWithGiveSteps(matrix, k) {
 		row.forEach((point, j) => {
 			let movements = 0;
 			const init = `${i},${j}`;
-			let end = point;
+      let end = '';
 
-			while (movements < k) {
+			while (movements++ < k) {
+        end = point;
 				const [y, x] = end.split(',');
-				end = matrix[y][x];
-				movements++;
+				point = matrix[y][x];
 			}
 
 			if (init === end) {
