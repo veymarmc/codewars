@@ -4,8 +4,29 @@
  * @param {number} k number of steps to take on account.
  * @returns all the round-trips that number of steps are equal to k
  */
-function robotTransfer(matrix, k) {
-  return 0
+function getNumberOfPathsWithGiveSteps(matrix, k) {
+	let numberOfPaths = 0;
+
+	matrix.forEach((row, i) =>
+		row.forEach((point, j) => {
+			let movements = 0;
+			const init = `${i},${j}`;
+			let end = point;
+
+			while (init !== end && movements < k) {
+				const [y, x] = end.split(',');
+				end = matrix[y][x];
+				movements++;
+			}
+
+			if (init === end && movements === k - 1) {
+				numberOfPaths++;
+			}
+		})
+	);
+
+	return numberOfPaths;
 }
 
-module.exports = robotTransfer;
+module.exports = getNumberOfPathsWithGiveSteps;
+
