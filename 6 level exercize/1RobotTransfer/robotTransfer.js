@@ -13,13 +13,13 @@ function getNumberOfPathsWithGiveSteps(matrix, k) {
 			const init = `${i},${j}`;
 			let end = point;
 
-			while (init !== end && movements < k) {
+			while (movements < k) {
 				const [y, x] = end.split(',');
 				end = matrix[y][x];
 				movements++;
 			}
 
-			if (init === end && movements === k - 1) {
+			if (init === end) {
 				numberOfPaths++;
 			}
 		})
