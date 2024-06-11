@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest --  minimumBonus.test.js"
+    "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
