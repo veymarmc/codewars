@@ -7,13 +7,9 @@ function getNextNumberSame1Digits(n) {
 	const binary = n.toString(2);
 	const patternIndex = binary.lastIndexOf('01');
 
-	if (patternIndex !== -1) {
-		const nextStringNumber =
-			binary.slice(0, patternIndex) + '10' + binary.slice(patternIndex + 2, binary.length);
-		return parseInt(nextStringNumber, 2);
-	}
-
-	return parseInt(binary.replace(/(1)(1*)(0*)/, '$1$30$2'), 2);
+	return patternIndex !== -1
+    ? parseInt(binary.replace(/(.*)(01)(1*)(0*)$/, '$110$4$3'), 2)
+    : parseInt(binary.replace(/(1)(1*)(0*)/, '$1$30$2'), 2);
 }
 
 module.exports = getNextNumberSame1Digits;

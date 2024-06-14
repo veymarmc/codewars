@@ -7,6 +7,7 @@ describe('Get next bigger number with same 1 digits', () => {
     compareBasicTest(1022, 1279);
     compareBasicTest(127, 191);
     compareBasicTest(1253343, 1253359);
+    compareBasicTest(603487214, 603487219);
   })
 })
 
