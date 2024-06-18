@@ -3,6 +3,16 @@
  * @param {number} n integer to check if even or odd
  * @returns return "even" or "odd"
  */
-function isEvenOrOdd(n) {
-  return '';
+function checkEvenOrOdd(n) {
+  return n % 2 === 0 ? 'Even' : 'Odd';
 }
+
+const handler = {
+  get(_, prop) {
+    return checkEvenOrOdd(+prop);
+  }
+}
+
+const isEvenOrOdd = new Proxy(checkEvenOrOdd, handler);
+
+module.exports = isEvenOrOdd;
