@@ -13,7 +13,7 @@ const exampleTestParams = [
 ];
 
 describe('Group Integers', () => {
-  test.each(exampleTestParams)('Text example: %o with key: %i', (list, k, expected) => {
+  test.each(exampleTestParams)('Text example: %s with key: %i', (list, k, expected) => {
     expect(groupInts(list, k)).toEqual(expected);
   });
 });
