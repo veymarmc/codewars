@@ -4,7 +4,7 @@
  * @param {number} x interger key to get nested lists
  * @returns An array of ordered arrays according to the key.
  */
-function groupInts(xs, x) {
+function groupInts2(xs, x) {
 	let yetGreat = false;
 
 	return xs.reduce((result, current) => {
@@ -27,6 +27,27 @@ function groupInts(xs, x) {
 		}
 
 		return result;
+	}, []);
+}
+
+/**
+ * best solution taken of the offered answers.
+ * @param {Array} xs 
+ * @param {number} x 
+ * @returns splitted array
+ */
+function groupInts (xs, x) {
+	let limit;
+
+	return xs.reduce((res, num) => {
+		if (limit === num < x)
+			res.at(-1).push(num);
+		else {
+			res.push([num]);
+			limit = num < x;
+		}
+
+		return res;
 	}, []);
 }
 
