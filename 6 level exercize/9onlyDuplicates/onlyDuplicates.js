@@ -4,8 +4,11 @@
  * @returns the string with only duplicate characters
  */
 function keepOnlyDuplicates(str) {
-  // your code here
-  return str
+  return str.split('').reduce((res, char) => {
+    return res.includes(char) || (new RegExp(`${char}.*${char}`)).test(str)
+      ? res + char
+      : res;
+  }, '');
 }
 
 module.exports = keepOnlyDuplicates;
