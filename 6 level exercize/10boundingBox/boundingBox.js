@@ -3,6 +3,8 @@
  * @param {Array} imageArray 
  * @returns an Array with the bounding box of the image.
  */
-function boundingBox(imageArray) {
-  return [];
+function getBoundingBox(imageArray) {
+  return imageArray;
 }
+
+module.exports = getBoundingBox;
