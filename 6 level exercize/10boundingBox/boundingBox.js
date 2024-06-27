@@ -7,7 +7,7 @@ function getBoundingBox(imageArray) {
 	let [x1, y1, x2, y2] = [];
 
 	for (let y = 0; y < imageArray.length; y++) {
-		for (let x = 0; x < imageArray.length; x++) {
+		for (let x = 0; x < imageArray[0].length; x++) {
 			if (imageArray[y][x]) {
 				x1 = x > x1 ? x1 : x;
 				y1 = y > y1 ? y1 : y;
