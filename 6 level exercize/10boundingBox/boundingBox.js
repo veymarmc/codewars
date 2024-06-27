@@ -14,14 +14,12 @@ function getBoundingBox(imageArray) {
 				x2 = x < x2 ? x2 : x;
 				y2 = y < y2 ? y2 : y;
 			}
+
+			imageArray[y][x] = 0;
 		}
 	}
 
 	if (x1 < 0) return imageArray;
-
-	imageArray = Array(imageArray.length)
-		.fill(0)
-		.map(_ => Array(imageArray[0].length).fill(0));
 
 	for (let i = x1; i <= x2; i++) {
 		imageArray[y1][i] = 1;
