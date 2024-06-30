@@ -5,7 +5,11 @@
  * @returns the number the feelings found in "1 feeling" format.
  */
 function countFeelings(string, array) {
-  return "";
+	const regex = new RegExp(`[${string}]`, 'g');
+	const numberOfFeelings = array.reduce((r, feeling) => (feeling.replace(regex, '') ? r : ++r), 0);
+
+	return numberOfFeelings + ' feeling' + (numberOfFeelings === 1 ? '.' : 's.');
 }
 
 module.exports = countFeelings;
+
