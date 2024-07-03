@@ -5,5 +5,12 @@
  * @returns an array that shows how much each beggar have after distribution
  */
 function distributeTobeggars(values, n){
-  return [];
+  if (n === 0) return [];
+
+  const beggars = Array(n).fill(0);
+  [...values].forEach((share, i) => beggars[i % n] += share);
+
+  return beggars;
 }
+
+module.exports = distributeTobeggars;
