@@ -7,3 +7,5 @@
 function distributeTobeggars(values, n){
   return [];
 }
+
+module.exports = distributeTobeggars;
